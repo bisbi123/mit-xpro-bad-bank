@@ -5,6 +5,7 @@ import NavBar from './NavBar.js';
 import Home from './pages/Home.js';
 import Login from './pages/Login.js';
 import CreateAccount from './pages/CreateAccount.js';
+import Deposit from './pages/Deposit.js';
 import AllData from './pages/AllData.js';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path='/' exact component={Home} />
         <Route path='/create-account' component={CreateAccount} />
         <Route path='/login' component={Login} />
+        <Route path='/deposit' component={Deposit} />
         <Route path='/all-data' component={AllData} />
       </UserContext.Provider>
     </HashRouter>
