@@ -13,8 +13,9 @@ function App() {
     <HashRouter>
       <NavBar />
       <UserContext.Provider value={{
+        loggedInUser: null,
         users: [
-          { username: 'acrist', password: 'password', balance: '10' }
+          { username: 'acrist', password: 'password', balance: 10 }
         ]
       }}>
         <Route path='/' exact component={Home} />
