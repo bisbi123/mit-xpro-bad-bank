@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, HashRouter } from 'react-router-dom';
+
+import UserContext from './UserContext.js';
+import NavBar from './NavBar.js';
+import Home from './pages/Home.js';
+import Login from './pages/Login.js';
+import CreateAccount from './pages/CreateAccount.js';
+import AllData from './pages/AllData.js';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <HashRouter>
+      <NavBar />
+      <UserContext.Provider value={{
+        users: [
+          { username: 'acrist', password: 'password', balance: '10' }
+        ]
+      }}>
+        <Route path='/' exact component={Home} />
+        <Route path='/create-account' component={CreateAccount} />
+        <Route path='/login' component={Login} />
+        <Route path='/all-data' component={AllData} />
+      </UserContext.Provider>
+    </HashRouter>
   );
 }
 
