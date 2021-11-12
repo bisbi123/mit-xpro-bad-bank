@@ -14,14 +14,20 @@
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "mongodb": "^3.6.2",
+    "express": "^4.16.3",
+    "cors": "^2.8.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "init-front-end": "react-scripts start",
+    "init-back-end": "node src/api.js",
+    "start": "npm run init-front-end",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "http://localhost:5000",
   "eslintConfig": {
     "extends": [
       "react-app",
