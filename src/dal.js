@@ -11,7 +11,7 @@ MongoClient.connect(url, {useUnifiedTopology: true}, function(err, client) {
 });
 
 // create user account
-function create(name, email, password){
+function createAccount(name, email, password){
     return new Promise((resolve, reject) => {    
         const collection = db.collection('users');
         const doc = {name, email, password, balance: 0};
@@ -22,7 +22,7 @@ function create(name, email, password){
 }
 
 // find user account
-function find(email){
+function findAccount(email){
     return new Promise((resolve, reject) => {    
         const customers = db
             .collection('users')
@@ -45,7 +45,7 @@ function findOne(email){
 }
 
 // update - deposit/withdraw amount
-function update(email, amount){
+function updateBalance(email, amount){
     return new Promise((resolve, reject) => {    
         const customers = db
             .collection('users')            
@@ -63,7 +63,7 @@ function update(email, amount){
 }
 
 // all users
-function all(){
+function findAllAccounts(){
     return new Promise((resolve, reject) => {    
         const customers = db
             .collection('users')
@@ -75,7 +75,7 @@ function all(){
 }
 
 
-module.exports = {create, findOne, find, update, all};
+module.exports = {createAccount, findOne, findAccount,updateBalance, findAllAccounts};
 
 // /**
 //  * Return an array of users in the database
