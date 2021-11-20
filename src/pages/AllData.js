@@ -1,16 +1,14 @@
 
-import {getAllUsersAsArray} from '../dal'
+
 
 function callAPI(){
 
-  getAllUsersAsArray()
-    .then(arrOut =>{
-      arrOut.forEach(data => {
+  fetch('http://localhost:5000/account/all')
+    .then(resp => resp.json())
+      .then(data =>{
         let el = document.getElementById('allData');
         el.innerHTML += JSON.stringify(data);
-        
-      });
-    })
+      })
   
 
 }
