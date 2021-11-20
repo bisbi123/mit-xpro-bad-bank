@@ -75,14 +75,13 @@ function findAllAccounts(){
 }
 
 
-module.exports = {createAccount, findOne, findAccount,updateBalance, findAllAccounts};
-
 // /**
 //  * Return an array of users in the database
 //  * @returns {Promise} An array wrapped in an promise
 //  */
-// export function getAllUsersAsArray(){
+// function getAllUsersAsArray(){
 //     return fetch("http://localhost:5000/account/all")
 //       .then(response => response.json())
 // }
 
+module.exports = {createAccount, findOne, findAccount,updateBalance, findAllAccounts};
