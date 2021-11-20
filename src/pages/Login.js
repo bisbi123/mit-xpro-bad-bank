@@ -1,22 +1,26 @@
 import { useContext } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
+import UserContext from '../UserContext'
 
-import UserContext from '../UserContext.js';
 
-function checkLogin(username, password, users) {
-  for (const user of users) {
-    if (
-      user.username === username &&
-      user.password === password
-    ) {
-      return true;
+async function checkLogin(email, password) {
+  
+  
+  
+  let resp = await fetch(`http://localhost:5000/account/login/${email}/${password}`);
+  if (resp.status === 200){
+    let data = await resp.json();
+    if (data !== null){
+      if (data.email === email & data.password === password){
+        return [true, data];
+      }
+      else {return [false, null];}
     }
   }
-  return false;
+
 }
 
 function Login() {
-
   const context = useContext(UserContext);
 
   const formikProps = {
@@ -24,7 +28,7 @@ function Login() {
       username: '',
       password: ''
     },
-    validate: values => {
+    validate: async values => {
       const errors = {};
       if (!values.username) {
         errors.username = 'Required';
@@ -32,18 +36,26 @@ function Login() {
       if (!values.password) {
         errors.password = 'Required';
       }
-      const isLoginValid = checkLogin(
+      const isLoginValid = await checkLogin(
         values.username,
-        values.password,
-        context.users
-      );
+        values.password);
+      if ( isLoginValid !== undefined){
+        if (isLoginValid[1] !== undefined){
+          values.data = isLoginValid[1];
+        }
+        
+      }
       if (!isLoginValid) {
         errors.login = 'Invalid login';
       }
+      
+      console.log(isLoginValid)
       return errors;
     },
     onSubmit: (values, { resetForm }) => {
-      context.loggedInUser = values.username;
+      
+      context.loggedInUser = values.data.name;
+      context.balance = values.data.balance;
       resetForm();
       alert(`Welcome back, ${values.username}!`);
     }
@@ -66,7 +78,7 @@ function Login() {
             <Field className='form-control' id='password' name='password' placeholder='****' type='password' />
             <ErrorMessage className='error' name='password' component='div' />
           </div>
-          
+
           <br/>
           <button type='submit' className='btn btn-primary'>Login</button>
         </Form>

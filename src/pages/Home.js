@@ -21,19 +21,15 @@ function Home() {
   else {
 
     // Get a reference to the logged in user
-    let user;
-    for (const eachUser of context.users) {
-      if (eachUser.username === context.loggedInUser) {
-        user = eachUser;
-      }
-    }
+    let user = context.loggedInUser;
+    let balance = context.balance;
 
     // Update the message with the user's information
     message = (
       <div>
-        Welcome back, {user.username}!
+        Welcome back, {user}!
         <br/>
-        Your balance is ${user.balance}.
+        Your balance is ${balance}.
       </div>
     );   
   }
