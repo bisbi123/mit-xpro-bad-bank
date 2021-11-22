@@ -56,6 +56,7 @@ function Login() {
       
       context.loggedInUser = values.data.name;
       context.balance = values.data.balance;
+      context.email = values.data.email;
       resetForm();
       alert(`Welcome back, ${values.username}!`);
     }
