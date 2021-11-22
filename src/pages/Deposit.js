@@ -2,6 +2,31 @@ import { useContext } from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 
 import UserContext from '../UserContext.js';
+var clicked = false;
+function onDeposit(){
+  clicked = true;
+}
+
+async function deposit(email, amount) {
+  if (!clicked){
+    return [false, null];
+  }
+  else{
+    clicked = false;
+    let resp = await fetch(`http://localhost:5000/account/update/${email}/${amount}`);
+    if (resp.status === 200){
+      let data = await resp.json();
+      if (data !== null){
+        if (data.value.email === email){
+          return [true, data.value.balance]
+        }
+        else {return [false, null];}
+      }
+    }
+    else { return false; }
+  }
+  
+}
 
 function Deposit() {
 
@@ -20,28 +45,33 @@ function Deposit() {
   }
 
   // Get the logged in user
-  let user;
-  for (const eachUser of context.users) {
-    if (eachUser.username === context.loggedInUser) {
-      user = eachUser;
-    }
-  }
+  let balance = context.balance;
+  let email = context.email;
 
   // Set up formik
   const formikProps = {
     initialValues: {
       amount: 0
     },
-    onSubmit: (values, { resetForm }) => {
+    validate: async values => {
+      const errors = {};
+      const depositComplete = await deposit(
+        email, 
+        Number(values.amount),
+        context)
 
-      // Update our user's balance
-      for (let i = 0; i < context.users.length; i++) {
-        const eachUser = context.users[i];
-        if (eachUser.username === context.loggedInUser) {
-          context.users[i].balance += Number(values.amount);
-        }
+      if (!depositComplete[0]){
+        errors.deposit = 'Unable to deposit';
       }
-
+      else {
+        balance = depositComplete[1]
+        context.balance = balance;
+        
+      }
+      return errors;
+    },
+    onSubmit: (values, { resetForm }) => {
+      
       resetForm();
       alert('Amount deposited!');
     }
@@ -52,7 +82,7 @@ function Deposit() {
     <div className='content'>
       <h2>Deposit</h2>
       <div>
-        Your balance is: ${user.balance}.
+        Your balance is: ${balance}.
       </div>
 
       <Formik {...formikProps}>
@@ -64,7 +94,7 @@ function Deposit() {
           </div>
 
           <br/>
-          <button type='submit' className='btn btn-primary'>Deposit</button>
+          <button type='submit' className='btn btn-primary' onClick={onDeposit}>Deposit</button>
         </Form>
 
       </Formik>
