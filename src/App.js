@@ -10,26 +10,19 @@ import AllData from './pages/AllData.js';
 import React from 'react';
 
 
-
-// function App() {
-//   return (
-    // <HashRouter>
-    //   <NavBar />
-    //   <UserContext.Provider value={{
-    //     loggedInUser: null
-    //   }}>
-    //     <Route path='/' exact component={Home} />
-    //     <Route path='/create-account' component={CreateAccount} />
-    //     <Route path='/login' component={Login} />
-    //     <Route path='/deposit' component={Deposit} />
-    //     <Route path='/all-data' component={AllData} />
-    //   </UserContext.Provider>
-    // </HashRouter>
-//   );
-// }
-const isAuthenticated = false;
-
 class App extends React.Component{
+  
+  
+  constructor(props){
+    super(props)
+    this.state = {isAuthenticated: false}
+    this.ctx = {
+      loggedInUser: null,
+      email: null,
+      balance: null
+    }
+    
+  }
   
   login = () => {
     this.setState({ isAuthenticated: true });
@@ -40,22 +33,25 @@ class App extends React.Component{
     this.setState({ isAuthenticated: false });
     console.log("We logged out!")
   }
-  render() {
-    const isLoggedIn = this.props.isLoggedIn;
-    console.log(isLoggedIn);
+  render() {    
 
     return (
       <HashRouter>
-      <NavBar isLoggedIn={isAuthenticated} logout={this.logout} />
-      <UserContext.Provider value={{
-        loggedInUser: null
-      }}>
-        <Route path='/' exact component={Home} />
-        <Route path='/create-account' component={CreateAccount} />
-        <Route login={this.login} path='/login' component={Login} />
-        <Route path='/deposit' component={Deposit} />
-        <Route path='/all-data' component={AllData} />
-      </UserContext.Provider>
+        <NavBar isLoggedIn={this.state.isAuthenticated} ctx={this.ctx} logout={this.logout} />
+        <UserContext.Provider value={{
+          loggedInUser: null
+        }}>
+          <Route path='/' exact>
+            <Home ctx={this.ctx}/>
+          </Route>
+          <Route path='/create-account' component={CreateAccount} />
+          <Route path='/login'>
+            <Login ctx={this.ctx} login={this.login}/>
+          </Route>
+          
+          <Route path='/deposit' component={Deposit} />
+          <Route path='/all-data' component={AllData} />
+        </UserContext.Provider>
     </HashRouter>
     )
   }

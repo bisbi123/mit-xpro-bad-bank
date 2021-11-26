@@ -1,5 +1,4 @@
-
-
+import React from "react";
 
 function callAPI(){
 
@@ -17,19 +16,20 @@ function callAPI(){
 
 }
 
-function AllData() {
 
-  
-  return (
-    <div className='content'>
-      <h2>All Data</h2>
-      <button onClick={callAPI}>Get Data</button>
-      <div className="container">
-        <div id='allData' className="content"/>
+class AllData extends React.Component{
+  render(){
+    return (
+      <div className='content'>
+        <h2>All Data</h2>
+        <button onClick={callAPI}>Get Data</button>
+        <div className="container">
+          <div id='allData' className="content"/>
+        </div>
+        
       </div>
-      
-    </div>
-  );
+    );
+  }
 }
 
 export default AllData;

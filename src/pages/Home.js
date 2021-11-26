@@ -1,45 +1,46 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 
-import UserContext from '../UserContext';
+class Home extends React.Component {
 
-function Home() {
+  constructor(props){
+    super(props);
+    this.message="";
 
-  const context = useContext(UserContext);
+    // Handle if user is not logged in
+    if (this.props.ctx.loggedInUser === null) {
+      this.message = (
+        <div>
+          You are not logged in.
+        </div>
+      );
+    } 
+    
+    // Handle if user is logged in
+    else {
 
-  let message;
+      // Get a reference to the logged in user
+      let user = this.props.ctx.loggedInUser;
+      let balance = this.props.ctx.balance;
 
-  // Handle if user is not logged in
-  if (context.loggedInUser === null) {
-    message = (
-      <div>
-        You are not logged in.
-      </div>
-    );
-  } 
-  
-  // Handle if user is logged in
-  else {
-
-    // Get a reference to the logged in user
-    let user = context.loggedInUser;
-    let balance = context.balance;
-
-    // Update the message with the user's information
-    message = (
-      <div>
-        Welcome back, {user}!
-        <br/>
-        Your balance is ${balance}.
-      </div>
-    );   
+      // Update the message with the user's information
+      this.message = (
+        <div>
+          Welcome back, {user}!
+          <br/>
+          Your balance is ${balance}.
+        </div>
+      );   
+    }
   }
 
-  return (
-    <div className='content'>
-      <h2>Home</h2>
-      {message}
-    </div>
-  );
+  render(){
+    return (
+      <div className='content'>
+        <h2>Home</h2>
+        {this.message}
+      </div>
+    );
+  }
 }
 
 export default Home;
