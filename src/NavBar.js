@@ -17,7 +17,9 @@ class NavBar extends React.Component{
           <Bootstrap.Nav className="ml-auto">
             <Bootstrap.Navbar.Text>
                   { this.props.isLoggedIn && <a>{this.props.ctx.loggedInUser}</a>}
-                  {!this.props.isLoggedIn && <a href="/#/login">Not Logged In YO</a>}
+                  {this.props.isLoggedIn && <Bootstrap.Button className="m-1" onClick={this.props.logout}>Log Out</Bootstrap.Button>}
+                  {!this.props.isLoggedIn && <a href="/#/login">Not Logged In</a>}
+                  
             </Bootstrap.Navbar.Text>
           </Bootstrap.Nav>
         </Bootstrap.Container>

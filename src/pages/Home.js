@@ -1,13 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 class Home extends React.Component {
 
   constructor(props){
     super(props);
     this.message="";
+  }
 
-    // Handle if user is not logged in
-    if (this.props.ctx.loggedInUser === null) {
+  render(){
+     // Handle if user is not logged in
+     if (this.props.ctx.loggedInUser === null) {
       this.message = (
         <div>
           You are not logged in.
@@ -31,9 +33,6 @@ class Home extends React.Component {
         </div>
       );   
     }
-  }
-
-  render(){
     return (
       <div className='content'>
         <h2>Home</h2>

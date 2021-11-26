@@ -15,11 +15,14 @@ class App extends React.Component{
   
   constructor(props){
     super(props)
-    this.state = {isAuthenticated: false}
-    this.ctx = {
-      loggedInUser: null,
-      email: null,
-      balance: null
+    this.state = {
+      isAuthenticated: false,
+      ctx : {
+        loggedInUser: null,
+        email: null,
+        balance: null
+      }
+
     }
     
   }
@@ -31,22 +34,26 @@ class App extends React.Component{
 
   logout = () => {
     this.setState({ isAuthenticated: false });
-    console.log("We logged out!")
+    this.setState({ctx:{
+      loggedInUser: null,
+      email: null,
+      balance: null
+    }})
   }
   render() {    
 
     return (
       <HashRouter>
-        <NavBar isLoggedIn={this.state.isAuthenticated} ctx={this.ctx} logout={this.logout} />
+        <NavBar isLoggedIn={this.state.isAuthenticated} ctx={this.state.ctx} logout={this.logout} />
         <UserContext.Provider value={{
           loggedInUser: null
         }}>
           <Route path='/' exact>
-            <Home ctx={this.ctx}/>
+            <Home ctx={this.state.ctx}/>
           </Route>
           <Route path='/create-account' component={CreateAccount} />
           <Route path='/login'>
-            <Login ctx={this.ctx} login={this.login}/>
+            <Login ctx={this.state.ctx} login={this.login}/>
           </Route>
           
           <Route path='/deposit' component={Deposit} />
