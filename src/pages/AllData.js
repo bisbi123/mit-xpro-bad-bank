@@ -7,7 +7,11 @@ function callAPI(){
     .then(resp => resp.json())
       .then(data =>{
         let el = document.getElementById('allData');
-        el.innerHTML += JSON.stringify(data);
+        el.innerHTML = "";
+        data.forEach(obj => {
+          el.innerHTML += JSON.stringify(obj,null,"\t\n");
+        });
+        
       })
   
 
