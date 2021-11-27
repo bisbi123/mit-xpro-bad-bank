@@ -40,6 +40,19 @@ class App extends React.Component{
       balance: null
     }})
   }
+
+  //TODO: Need to add sate updater for ctx.balance
+  updateBalance = (amount) => {
+    // because we are updating a nested property, this will look a little
+    // funky, so bare with me here ...
+
+    this.setState({ctx:{
+      loggedInUser: this.state.ctx.loggedInUser,
+      email: this.state.ctx.email,
+      balance: amount
+    }})
+  }
+
   render() {    
 
     return (
@@ -51,12 +64,17 @@ class App extends React.Component{
           <Route path='/' exact>
             <Home ctx={this.state.ctx}/>
           </Route>
+
           <Route path='/create-account' component={CreateAccount} />
+
           <Route path='/login'>
             <Login ctx={this.state.ctx} login={this.login}/>
           </Route>
-          
-          <Route path='/deposit' component={Deposit} />
+
+          <Route path='/deposit'>
+            <Deposit ctx={this.state.ctx} updateBalance={this.updateBalance}/>
+          </Route>
+
           <Route path='/all-data' component={AllData} />
         </UserContext.Provider>
     </HashRouter>
