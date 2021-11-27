@@ -15,14 +15,14 @@ app.get('/account/create/:name/:email/:password', function (req, res) {
 
             // if user exists, return error message
             if (users.length > 0) {
-                console.log('User already in exists');
+                // console.log('User already in exists');
                 res.send('User already in exists');
             }
             else {
                 // else create user
                 dal.createAccount(req.params.name, req.params.email, req.params.password)
                     .then((user) => {
-                        console.log(user);
+                        // console.log(user);
                         res.send(user);
                     });
             }
@@ -57,7 +57,7 @@ app.get('/account/find/:email', function (req, res) {
 
     dal.findAccount(req.params.email)
         .then((user) => {
-            console.log(user);
+            // console.log(user);
             res.send(user);
         });
 });
@@ -67,7 +67,7 @@ app.get('/account/findOne/:email', function (req, res) {
 
     dal.findOne(req.params.email)
         .then((user) => {
-            console.log(user);
+            // console.log(user);
             res.send(user);
         });
 });
@@ -79,7 +79,7 @@ app.get('/account/update/:email/:amount', function (req, res) {
 
     dal.updateBalance(req.params.email, amount)
         .then((response) => {
-            console.log(response);
+            // console.log(response);
             res.send(response);
         });
 });
@@ -89,7 +89,7 @@ app.get('/account/all', function (req, res) {
 
     dal.findAllAccounts()
         .then((docs) => {
-            console.log(docs);
+            // console.log(docs);
             res.send(docs);
         });
 });
