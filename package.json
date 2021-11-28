@@ -20,9 +20,7 @@
     "cors": "^2.8.4"
   },
   "scripts": {
-    "init-front-end": "react-scripts start",
-    "init-back-end": "node src/api.js",
-    "start": "npm run init-front-end",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
