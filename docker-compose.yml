@@ -2,5 +2,9 @@ version: "3"
 services:
   app:
     build: .
+    container_name:
+        bb-app
+    image:
+      bad-bank:v1
     ports:
       - "3000:3000"
