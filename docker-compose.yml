@@ -10,41 +10,41 @@ services:
     ports:
       - "3000:3000"
     build: .
-    networks:
-      - mern-app
+    # networks:
+    #   - mern-app
     
-  # API service
-  api-server:
-    container_name:
-      bb-backend
-    image:
-      bb-backend:v1
-    ports:
-      - "5000:5000"
-    build: 
-      context: ./backend
-      network: host
-    depends_on:
-      - mongo
-    networks:
-      - mern-app
+#   # API service
+#   api-server:
+#     container_name:
+#       bb-backend
+#     image:
+#       bb-backend:v1
+#     ports:
+#       - "5000:5000"
+#     build: 
+#       context: ./backend
+#       network: host
+#     depends_on:
+#       - mongo
+#     networks:
+#       - mern-app
 
-  # Data store service 
-  mongo:
-    image: mongo
-    ports:
-      - "27017:27017"
-    networks:
-      - mern-app
-    volumes:
-      - mongo-data:/data/db
+#   # Data store service 
+#   mongo:
+#     image: mongo
+#     ports:
+#       - "27017:27017"
+#     networks:
+#       - mern-app
+#     volumes:
+#       - mongo-data:/data/db
 
-# Ensure that the applicaiton talks in the same network
-networks:
-  mern-app:
-    driver: bridge
+# # Ensure that the applicaiton talks in the same network
+# networks:
+#   mern-app:
+#     driver: bridge
 
-# assign a volume for the mongo data
-volumes:
-  mongo-data:
-    driver: local
+# # assign a volume for the mongo data
+# volumes:
+#   mongo-data:
+#     driver: local

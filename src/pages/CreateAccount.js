@@ -16,7 +16,7 @@ async function createNewAccount(name, email, password) {
   }
   else {
     clicked = false;
-    let resp = await fetch(`http://localhost:5000/account/create/${name}/${email}/${password}`);
+    let resp = await fetch(`https://bad-bank-api.herokuapp.com/account/create/${name}/${email}/${password}`);
     if (resp.status === 200){
       let data = await resp.json();
       if (data !== null){

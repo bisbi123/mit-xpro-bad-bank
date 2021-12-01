@@ -4,7 +4,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 
 async function checkLogin(email, password) {
   
-  let resp = await fetch(`http://localhost:5000/account/login/${email}/${password}`);
+  let resp = await fetch(`https://bad-bank-api.herokuapp.com/account/login/${email}/${password}`);
   if (resp.status === 200){
     let data = await resp.json();
     if (data !== null){

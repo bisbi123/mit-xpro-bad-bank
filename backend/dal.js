@@ -1,5 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
-const url         = 'mongodb+srv://one-week-user-starts-2021-11-30:njJcxLRn1xzudixp@bbdb-cluster.yvexm.mongodb.net';
+const url         = 'mongodb+srv://user:password@bbdb-cluster.yvexm.mongodb.net';
 let db            = null;
  
 // connect to mongo
@@ -80,7 +80,7 @@ function findAllAccounts(){
 //  * @returns {Promise} An array wrapped in an promise
 //  */
 // function getAllUsersAsArray(){
-//     return fetch("http://localhost:5000/account/all")
+//     return fetch("https://bad-bank-api.herokuapp.com/account/all")
 //       .then(response => response.json())
 // }
 

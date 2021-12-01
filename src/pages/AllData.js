@@ -2,7 +2,7 @@ import React from "react";
 
 function callAPI(){
 
-  fetch('http://localhost:5000/account/all')
+  fetch('https://bad-bank-api.herokuapp.com/account/all')
     .then(resp => resp.json())
       .then(data =>{
         let el = document.getElementById('allData');

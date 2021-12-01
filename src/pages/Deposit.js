@@ -17,7 +17,7 @@ async function deposit(email, amount) {
   }
   else{
     clicked = false;
-    let resp = await fetch(`http://localhost:5000/account/update/${email}/${amount}`);
+    let resp = await fetch(`https://bad-bank-api.herokuapp.com/account/update/${email}/${amount}`);
     if (resp.status === 200){
       let data = await resp.json();
       if (data !== null){
