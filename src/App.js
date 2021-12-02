@@ -41,7 +41,6 @@ class App extends React.Component{
     }})
   }
 
-  //TODO: Need to add sate updater for ctx.balance
   updateBalance = (amount) => {
     // because we are updating a nested property, this will look a little
     // funky, so bare with me here ...
