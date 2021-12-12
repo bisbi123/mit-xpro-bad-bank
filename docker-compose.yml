@@ -10,6 +10,9 @@ services:
     ports:
       - "3000:3000"
     build: .
+
+    # Uncomment everything below if you want to use Docker... 
+    # change https://bad-bank-api.herokuapp.com/ to http://localhost:5000/
     # networks:
     #   - mern-app
     
