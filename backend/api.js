@@ -5,6 +5,10 @@ var dal = require('./dal.js');
 
 app.use(cors());
 
+app.get("/", function(req, res) {
+    console.log(new Date().toLocaleString());
+    res.send("Welcome to the Bad-Bank MongoDB API");
+});
 
 // create user account + 
 app.get('/account/create/:name/:email/:password', function (req, res) {
@@ -94,6 +98,8 @@ app.get('/account/all', function (req, res) {
         });
 });
 
-var port = 5000;
-app.listen(port);
-console.log('Running on port: ' + port);
+var port = process.env.PORT || 3000;
+
+app.listen(port, function(){
+    console.log(`App is running on port ${port}`)
+})

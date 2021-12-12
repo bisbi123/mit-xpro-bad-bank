@@ -1,0 +1,13 @@
+version: "3"
+services:
+    
+  # API service
+  api-server:
+    container_name:
+      bb-backend
+    image:
+      bb-backend:v1
+    ports:
+      - "3000:3000"
+    build: 
+      context: ./backend

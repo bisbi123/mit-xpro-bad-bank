@@ -1,13 +1,12 @@
 const MongoClient = require('mongodb').MongoClient;
-const url         = 'mongodb+srv://user:password@bbdb-cluster.yvexm.mongodb.net';
+const url         = 'mongodb+srv://one-week-user-starts-2021-11-30:njJcxLRn1xzudixp@bbdb-cluster.yvexm.mongodb.net/bbdb-cluster?retryWrites=true&w=majority';
 let db            = null;
  
 // connect to mongo
 MongoClient.connect(url, {useUnifiedTopology: true}, function(err, client) {
-    console.log("Connected successfully to db server");
-
     // connect to myproject database
     db = client.db('bbdb-cluster');
+    console.log("Connected successfully to db server");
 });
 
 // create user account
@@ -80,7 +79,7 @@ function findAllAccounts(){
 //  * @returns {Promise} An array wrapped in an promise
 //  */
 // function getAllUsersAsArray(){
-//     return fetch("https://bad-bank-api.herokuapp.com/account/all")
+//     return fetch("http://localhost:5000/account/all")
 //       .then(response => response.json())
 // }
 
