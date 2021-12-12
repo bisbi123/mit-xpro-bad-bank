@@ -5,7 +5,7 @@ import NavBar from './NavBar.js';
 import Home from './pages/Home.js';
 import Login from './pages/Login.js';
 import CreateAccount from './pages/CreateAccount.js';
-import Deposit from './pages/Deposit.js';
+import Transaction from './pages/Transaction';
 import AllData from './pages/AllData.js';
 import React from 'react';
 
@@ -70,8 +70,8 @@ class App extends React.Component{
             <Login ctx={this.state.ctx} login={this.login}/>
           </Route>
 
-          <Route path='/deposit'>
-            <Deposit ctx={this.state.ctx} updateBalance={this.updateBalance}/>
+          <Route path='/transaction'>
+            <Transaction ctx={this.state.ctx} updateBalance={this.updateBalance}/>
           </Route>
 
           <Route path='/all-data' component={AllData} />

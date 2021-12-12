@@ -7,11 +7,11 @@ var clicked = false;
 /**
  * Ensure that we don't deposit pre-maturely
  */
-function onDeposit(){
+function onTransaction(){
   clicked = true;
 }
 
-async function deposit(email, amount) {
+async function transaction(email, amount) {
   if (!clicked){
     return [false, null];
   }
@@ -33,7 +33,7 @@ async function deposit(email, amount) {
 }
 
 
-class Deposit extends React.Component {
+class Transaction extends React.Component {
 
   constructor(props){
     super(props)
@@ -52,16 +52,16 @@ class Deposit extends React.Component {
       },
       validate: async values => {
         const errors = {};
-        const depositComplete = await deposit(
+        const transactionComplete = await transaction(
           this.email, 
           Number(values.amount)
           )
 
-        if (!depositComplete[0]){
-          errors.deposit = 'Unable to deposit';
+        if (!transactionComplete[0]){
+          errors.transaction = 'Unable to complete transaction';
         }
         else {
-          values.balance = depositComplete[1]
+          values.balance = transactionComplete[1]
           
           
         }
@@ -82,7 +82,7 @@ class Deposit extends React.Component {
     if (this.props.ctx.loggedInUser === null) {
       return (
         <div className='content'>
-          <h2>Deposit</h2>
+          <h2>Transaction</h2>
           <div>
             You are not logged in.
           </div>
@@ -91,7 +91,7 @@ class Deposit extends React.Component {
     }
     return (
       <div className='content'>
-        <h2>Deposit</h2>
+        <h2>Transaction</h2>
         <div>
           Your balance is: ${this.props.ctx.balance}.
         </div>
@@ -105,7 +105,7 @@ class Deposit extends React.Component {
             </div>
   
             <br/>
-            <button type='submit' className='btn btn-primary' onClick={onDeposit}>Deposit</button>
+            <button type='submit' className='btn btn-primary' onClick={onTransaction}>Submit</button>
           </Form>
   
         </Formik>
@@ -115,4 +115,4 @@ class Deposit extends React.Component {
   }
 }
 
-export default Deposit;
+export default Transaction;
